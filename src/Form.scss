@@ -1,0 +1,123 @@
+$form-color: #e3b877;
+
+input:-webkit-autofill { 
+    -webkit-background-clip: text;
+}
+
+.dasgurias-form {
+    margin-top: 20px;
+    opacity: 0;
+    width: 100%;
+    transition: opacity .5s ease-out;
+
+    &[data-visible=true] { opacity: 1; }
+
+    form {
+        overflow-x: hidden;
+        padding-top: 20px;
+        width: 100%;
+    }
+}
+
+.form {
+    &--row {
+        .field {
+            position: relative;
+            width: 100%;
+
+            &--street { width: 80%; }
+        }
+
+        .field + .field {
+            .form--row--floating-label { left: 30px; }
+
+            input { width: 90%; }
+            
+            width: 20%;
+        }
+
+        &, & input {
+            width: 100%;
+        }
+
+        &:not(:last-child) {
+            margin-bottom: 40px;
+        }
+
+        .field > input:not([type=checkbox]) { appearance: none; }
+
+        .field > select, .field > input {
+            background: transparent;
+            border: 0;
+            color: $form-color;
+            padding: 10px;
+            outline: 0;
+            font-size: 18px;
+            letter-spacing: 1px;
+            border-bottom: 1px solid $form-color;
+            width: 100%;
+
+            &:not([data-show-placeholder])::placeholder {
+                visibility: hidden;
+            }
+
+            &[data-address-num] {
+                margin-left: 20px;
+            }
+
+            &:focus + .form--row--floating-label,
+            &:not(:focus):valid[type=text] + .form--row--floating-label {
+                bottom: 10px;
+                font-size: 11px;
+                opacity: 1;
+                top: -8px;
+            }
+        }
+
+        &--floating-label {
+            color: gray;
+            left: 10px;
+            pointer-events: none;
+            position: absolute;
+            top: 10px;
+            transition: 0.2s ease all;
+        }
+
+        &--street {
+            display: flex;
+            flex-direction: row;
+        }
+
+        &--name-for-delivery {
+            margin-top: 50px;
+
+            .address { display: none; }
+
+            label { color: $form-color; }
+
+            input[type=checkbox] {
+                float: left;
+                width: 20px;
+
+                &:checked + [data-visible],
+                &:checked ~ .address {
+                    display: block;
+                    opacity: 1;
+                }
+            }
+
+            [data-visible] {
+                display: none;
+                opacity: 0;
+                transition: opacity .2s ease-out;
+                margin-top: 20px;
+            }
+
+            &[data-different-address=true] {
+                border: 1px solid $form-color;
+                border-radius: 10px;
+                padding: 20px;
+            }
+        }
+    }
+}

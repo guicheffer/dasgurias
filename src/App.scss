@@ -10,9 +10,12 @@
   color: var(--primary-color);
 }
 
-.dasgurias {
+body {
   background: #251109;
-  height: 100vh;
+}
+
+.dasgurias {
+  min-height: 100vh;
   position: relative;
 
   &--content {
@@ -21,25 +24,36 @@
     flex-direction: column;
     left: 50%;
     position: absolute;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    top: calc(50% - 120px);
+    transform: translateX(-50%);
+    transition: top .5s ease-out;
+
+    &--form-requested {
+      top: 0;
+      width: 80%;
+    }
   }
 
   &--cta {
+    $size: 187px;
+
+    appearance: none;
     background: var(--secondary-color);
     border-radius: 8px;
+    border: 0;
     cursor: pointer;
     display: block;
     flex: 1;
     font-weight: 500;
     letter-spacing: 1px;
     margin-top: 2vh;
+    outline: none;
     padding: 13px;
     text-align: center;
     text-decoration: none;
     text-transform: uppercase;
     transition: background .2s ease-out;
-    width: 187px;
+    width: $size;
 
     &:hover, &:active {
       background: var(--hover-color);
