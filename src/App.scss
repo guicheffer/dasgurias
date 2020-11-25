@@ -1,0 +1,52 @@
+:root {
+  --primary-color: #2b1e15;
+  --secondary-color: #ab8331;
+
+  --hover-color: #ffeed5;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+  color: var(--primary-color);
+}
+
+.dasgurias {
+  background: #251109;
+  height: 100vh;
+  position: relative;
+
+  &--content {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &--cta {
+    background: var(--secondary-color);
+    border-radius: 8px;
+    cursor: pointer;
+    display: block;
+    flex: 1;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin-top: 2vh;
+    padding: 13px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background .2s ease-out;
+    width: 187px;
+
+    &:hover, &:active {
+      background: var(--hover-color);
+    }
+  }
+
+  &-logo {
+    width: 40vh;
+  }
+}
