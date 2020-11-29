@@ -1,13 +1,14 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 
 import './DeliveryOptions.scss';
+import { Amount } from './App';
 import { faDhl } from '@fortawesome/free-brands-svg-icons';
 import { faGlobeEurope, faPeopleCarry } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import getCurrentPrice from './commons/utils/get-current-price';
 
 interface DeliveryOptionsProps {
-  amount: number;
+  amount: Amount;
   handleChooseDeliveryOption: (event: any) => void;
 
   selectedDeliveryOption: DEFAULT_DELIVERIES;
@@ -73,7 +74,7 @@ export const DeliveryOptions: FunctionComponent<DeliveryOptionsProps> = ({ child
         </nav>
         <section className="delivery-options__current-price">
           <small> total: </small>
-          {getCurrentPrice(amount, DELIVERIES_FEES[selectedDeliveryOption])}
+          {getCurrentPrice(amount.total, DELIVERIES_FEES[selectedDeliveryOption])}
         </section>
       </section>
 

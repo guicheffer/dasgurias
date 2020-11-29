@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { Redirect, Route, Switch, useHistory, withRouter } from 'react-router-dom';
 
 import { Form, FormRequestData } from './Form';
@@ -9,6 +9,12 @@ import { ChooseProducts } from './ChooseProducts';
 import { DEFAULT_DELIVERIES, DeliveryOptions } from './DeliveryOptions';
 import { Confirm } from './Confirm';
 
+export type AmountType = 'brigadeiro';
+export interface Amount {
+  [key: string]: number;
+  total: number;
+}
+
 function App() {
   const history = useHistory();
 
@@ -17,11 +23,15 @@ function App() {
   const [requestStep, setRequestStep] = useState(0);
 
   const [formData, setFormData] = useState({});
-  const [amount, setAmount] = useState(1);
+
+  const [amount, setAmount] = useState({
+    brigadeiro: 0,
+    total: 0,
+  } as Amount);
+
   const [selectedDeliveryOption, setSelectedDeliveryOption] = useState(DEFAULT_DELIVERIES.dhl);
 
-  // TODO: Start using it in somewhere (as we were using it before) :)
-  // const _hasFormData = useMemo(() => !!Object.values(formData).length, [formData]);
+  const hasFormData = useMemo(() => !!Object.values(formData).length, [formData]);
 
   const handleRequest = useCallback(() => {
     setIsFormRequested(true);
@@ -58,12 +68,22 @@ function App() {
     history.push(`/pedir/${nextRequestStep}`);
   }, [history, requestStep]);
 
-  const handleReactiveAmountAdd = useCallback(() => {
-    setAmount(amount + 1);
+  const handleReactiveAmountAdd = useCallback((event) => {
+    const typeAmount = event.currentTarget.dataset.type as AmountType;
+    setAmount({
+      ...amount,
+      total: amount.total + 1,
+      [typeAmount]: amount[typeAmount] + 1,
+    });
   }, [amount]);
 
-  const handleReactiveAmountRemove = useCallback(() => {
-    setAmount(amount - 1);
+  const handleReactiveAmountRemove = useCallback((event) => {
+    const typeAmount = event.currentTarget.dataset.type as AmountType;
+    setAmount({
+      ...amount,
+      total: amount.total - 1,
+      [typeAmount]: amount[typeAmount] - 1
+    });
   }, [amount]);
 
   const handleChooseDeliveryOption = useCallback((event) => {
@@ -77,16 +97,11 @@ function App() {
 
         <Switch>
           <Route exact path="/" render={() => <Redirect to="/pedir" />} />
-
           <Route exact path="/pedir" render={() => !isFormRequested && <button onClick={handleRequest} className="dasgurias--cta"> Quero pedir </button>} />
-
-          <Route path="/pedir/1" render={() => <Form formData={formData as FormRequestData} visible={!!isFormVisible} handleFormSubmit={handleFormSubmit} />} />
-
-          <Route path="/pedir/2" render={() => <ChooseProducts amount={amount} handleReactiveAmountAdd={handleReactiveAmountAdd} handleReactiveAmountRemove={handleReactiveAmountRemove} stepBack={stepBack} stepFurther={stepFurther}/>} />
-
-          <Route path="/pedir/3" render={() => <DeliveryOptions amount={amount} handleChooseDeliveryOption={handleChooseDeliveryOption} selectedDeliveryOption={selectedDeliveryOption} stepBack={stepBack} stepFurther={stepFurther}/>} />
-
-          <Route path="/pedir/4" render={() => <Confirm amount={amount} formData={formData as FormRequestData} selectedDeliveryOption={selectedDeliveryOption} stepBack={stepBack} stepFurther={stepFurther}/>} />
+          <Route path="/pedir/1" render={() => isFormRequested && <Form formData={formData as FormRequestData} visible={!!isFormVisible} handleFormSubmit={handleFormSubmit} /> || <Redirect to="/pedir" /> } />
+          <Route path="/pedir/2" render={() => hasFormData && <ChooseProducts amount={amount} handleReactiveAmountAdd={handleReactiveAmountAdd} handleReactiveAmountRemove={handleReactiveAmountRemove} stepBack={stepBack} stepFurther={stepFurther}/> || <Redirect to="/pedir" /> } />
+          <Route path="/pedir/3" render={() => hasFormData && <DeliveryOptions amount={amount} handleChooseDeliveryOption={handleChooseDeliveryOption} selectedDeliveryOption={selectedDeliveryOption} stepBack={stepBack} stepFurther={stepFurther}/> || <Redirect to="/pedir" /> } />
+          <Route path="/pedir/4" render={() => hasFormData && <Confirm amount={amount} formData={formData as FormRequestData} selectedDeliveryOption={selectedDeliveryOption} stepBack={stepBack} stepFurther={stepFurther}/> || <Redirect to="/pedir" /> } />
         </Switch>
       </div>
     </div>

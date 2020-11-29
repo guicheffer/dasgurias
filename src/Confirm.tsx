@@ -2,13 +2,14 @@ import React, { FunctionComponent, ReactElement } from 'react';
 
 import './Confirm.scss';
 import { DEFAULT_DELIVERIES, DELIVERIES_FEES, DELIVERIES_TITLES } from './DeliveryOptions';
+import { Amount } from './App';
 import { AddressData } from './Form';
 import getCurrentPrice from './commons/utils/get-current-price';
 import { FormRequestData } from './Form';
 import { DEFAULT_COUNTRIES } from './Address';
 
 interface ConfirmProps {
-  amount: number;
+  amount: Amount;
   formData: FormRequestData;
   selectedDeliveryOption: DEFAULT_DELIVERIES;
 
@@ -34,7 +35,7 @@ export const Confirm: FunctionComponent<ConfirmProps> = ({ children, ...props })
         <br/> <br/>
 
         <p className="confirm__quantity">Quantidade</p>
-        <p className="confirm__quantity-amount">{amount} unidade{amount > 1 ? 's' : ''} do brigadeiro tradicional</p>
+        {amount.brigadeiro && <p className="confirm__quantity-amount">{amount.brigadeiro} unidade{amount.brigadeiro > 1 ? 's' : ''} do brigadeiro tradicional</p>}
 
         <br/> <br/>
 
@@ -43,7 +44,7 @@ export const Confirm: FunctionComponent<ConfirmProps> = ({ children, ...props })
 
         <br/> <br/>
         <p className="confirm__total">Valor total</p>
-        <p className="confirm__total-text">{getCurrentPrice(amount, DELIVERIES_FEES[selectedDeliveryOption])}</p>
+        <p className="confirm__total-text">{getCurrentPrice(amount.total, DELIVERIES_FEES[selectedDeliveryOption])}</p>
       </section>
 
       <div className="dasgurias--options">

@@ -1,15 +1,16 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 
 import './ChooseProducts.scss';
+import { Amount } from './App';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import getCurrentPrice from './commons/utils/get-current-price';
 
 interface ChooseProductsProps {
-  amount: number;
+  amount: Amount;
 
-  handleReactiveAmountAdd: () => void;
-  handleReactiveAmountRemove: () => void;
+  handleReactiveAmountAdd: (event: any) => void;
+  handleReactiveAmountRemove: (event: any) => void;
 
   stepBack: () => void;
   stepFurther: () => void;
@@ -21,23 +22,27 @@ export const ChooseProducts: FunctionComponent<ChooseProductsProps> = ({ childre
   return (
     <>
       <section className="choose-products">
-        <section className="choose-products__current-price"> {getCurrentPrice(amount)} <small>*</small> </section>
+        <section className="choose-products__current-price" data-disabled={amount.total < 1}> {getCurrentPrice(amount.total)} <small>*</small> </section>
 
-        <figure className="choose-products-image-container">
-          <img className="choose-products-image" src="/small-brigadeiro-transparent.png" alt="Brigadeiro Tradicional"/>
+        <div className="choose-products__products">
+          <figure className="choose-products-image-container">
+            <img className="choose-products-image" src="/small-brigadeiro-transparent.png" alt="Brigadeiro Tradicional"/>
 
-          <nav className="choose-products__quantity">
-            <button className="choose-products__quantity-button" type="button" onClick={handleReactiveAmountRemove} disabled={amount < 2}>
-              <FontAwesomeIcon className="choose-products__quantity-minus" icon={faMinus}/>
-            </button>
+            <p className="choose-products-product">Brigadeiro Tradicional</p>
 
-            <span className="choose-products__quantity--amount"> {amount} </span>
+            <nav className="choose-products__quantity">
+              <button className="choose-products__quantity-button" type="button" data-type="brigadeiro" onClick={handleReactiveAmountRemove} disabled={amount.brigadeiro < 1}>
+                <FontAwesomeIcon className="choose-products__quantity-minus" icon={faMinus}/>
+              </button>
 
-            <button className="choose-products__quantity-button" type="button" onClick={handleReactiveAmountAdd} disabled={amount >= 10}>
-              <FontAwesomeIcon className="choose-products__quantity-plus" icon={faPlus}/>
-            </button>
-          </nav>
-        </figure>
+              <span className="choose-products__quantity--amount"> {amount.brigadeiro} </span>
+
+              <button className="choose-products__quantity-button" type="button" data-type="brigadeiro" onClick={handleReactiveAmountAdd} disabled={amount.brigadeiro >= 10}>
+                <FontAwesomeIcon className="choose-products__quantity-plus" icon={faPlus}/>
+              </button>
+            </nav>
+          </figure>
+        </div>
 
         <p className="choose-products__quantity--explanation">
           * 1 unidade = € 6,90 + frete<br/>
@@ -48,7 +53,7 @@ export const ChooseProducts: FunctionComponent<ChooseProductsProps> = ({ childre
 
       <div className="dasgurias--options">
         <button type="submit" className="dasgurias--cta danger" onClick={stepBack}> Voltar </button>
-        <button type="submit" className="dasgurias--cta" onClick={stepFurther}> Próximo </button>
+        <button type="submit" className="dasgurias--cta" onClick={stepFurther} disabled={amount.total < 1}> Próximo </button>
       </div>
     </>
   );
