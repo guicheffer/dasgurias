@@ -1,0 +1,90 @@
+@import './commons/styles/breakpoints.scss';
+
+$black: #000;
+$white: #FFF;
+
+// TODO: Remove static sizes from css (terrible! 😛)
+
+.delivery-options {
+  width: 100%;
+
+  @media (min-width: $screen-sm-min) {
+    width: 70%;
+  }
+
+  &__choose{
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    li {
+      align-items: center;
+      border-radius: 8px;
+      border: 1px solid var(--secondary-color);
+      color: var(--secondary-color);
+      cursor: pointer;
+      display: flex;
+      filter: grayscale(1);
+      flex-direction: row;
+      height: 110px;
+      margin: 20px 0;
+      padding: 10px 20px;
+      transition: filter .2s ease-out;
+
+      &[data-selected=true], &:hover {
+        filter: none;
+      }
+
+      svg {
+        font-size: 60px !important;
+        margin-right: 20px;
+        width: 60px !important;
+      }
+    }
+  }
+
+  &__info {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+
+    h2 {
+      font-size: 18px;
+      margin: 10px 0 0;
+    }
+
+    &-description {
+      color: var(--text-color);
+      margin: 10px 0;
+    }
+
+    &-price {
+      color: var(--highlight-color);
+      font-weight: 500;
+      margin: 0;
+      position: absolute;
+      right: 5px;
+      top: 5px;
+    }
+  }
+
+  &__current-price {
+    color: var(--hover-color);
+    cursor: default;
+    font-size: 40px;
+    font-weight: 500;
+    margin: 2vh auto;
+    text-align: center;
+
+    small {
+      font-size: 20px;
+      left: 0;
+      margin-right: 20px;
+      top: 0;
+    }
+  }
+}

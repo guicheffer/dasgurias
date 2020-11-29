@@ -1,13 +1,29 @@
+@import './commons/styles/breakpoints.scss';
+
+$black: #000;
+$white: #FFF;
+
 :root {
   --primary-color: #2b1e15;
   --secondary-color: #ab8331;
 
   --hover-color: #ffeed5;
+  --text-color: #77725e;
+  --danger-color: #4c483a;
+  --button-color: #272a34;
+  --highlight-color: #f19d74;
 }
+
+@mixin selection-colors {
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+}
+
+::-moz-selection { @include selection-colors; }
+::selection { @include selection-colors; }
 
 *, *:before, *:after {
   box-sizing: border-box;
-  color: var(--primary-color);
 }
 
 body {
@@ -31,16 +47,25 @@ body {
     &--form-requested {
       top: 0;
       width: 80%;
+
+      @media (max-width: $screen-sm-max) {
+        width: 95%;
+      }
+    }
+
+    &[data-content-is-visible=true] {
+      position: relative;
     }
   }
 
   &--cta {
-    $size: 187px;
+    $size: 190px;
 
     appearance: none;
     background: var(--secondary-color);
     border-radius: 8px;
     border: 0;
+    color: $white;
     cursor: pointer;
     display: block;
     flex: 1;
@@ -52,15 +77,45 @@ body {
     text-align: center;
     text-decoration: none;
     text-transform: uppercase;
-    transition: background .2s ease-out;
-    width: $size;
+    transition: background .2s ease-out, color .2s ease-out;
+    user-select: none;
+    width: 50%;
 
-    &:hover, &:active {
+    &.danger {
+      background: var(--danger-color);
+      color: white;
+    }
+
+    @media (min-width: $screen-sm-max) {
+      width: $size;
+    }
+
+    &:active, &:hover {
       background: var(--hover-color);
+      color: $black;
+    }
+
+    &[disabled] {
+      background: gray;
+      pointer-events: none;
+    }
+  }
+
+
+  &--options {
+    display: flex;
+    margin: 40px 0;
+    width: 100%;
+
+    button {
+      margin-top: 0;
+
+      & + button { margin-left: 10px; }
     }
   }
 
   &-logo {
+    user-select: none;
     width: 40vh;
   }
 }
