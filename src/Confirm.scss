@@ -11,6 +11,25 @@ $white: #FFF;
     width: 70%;
   }
 
+  &[data-loading=true] {
+    filter: grayscale(1) blur(2px);
+
+    &::before {
+      background-image: url("./commons/images/loading.gif");
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
+      background-size: 50%;
+      content: '';
+      height: 100%;
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      z-index: 1;
+    }
+  }
+
   p {
     color: var(--text-color);
     margin: 0;

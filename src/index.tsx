@@ -22,7 +22,7 @@ ReactDOM.render(
     </Router>
 
     <footer role="footer" className="footer">
-      © DasGurias - Doces Brasileiros Saudáveis - ,2020
+      © <strong>DasGurias</strong> - Doces Brasileiros Saudáveis - , 2020
     </footer>
   </React.StrictMode>,
   dasguriasRoot,

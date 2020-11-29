@@ -1,6 +1,6 @@
-# 🍫 [DasGurias's marketplace](https://dasgurias.eu/)
+# 🍫 [DasGurias's small ecommerce](https://dasgurias.eu/)
 
-Codebase for website regarding dasgurias.eu (tiny marketplace for healthy brazilian sweets)
+Codebase for website regarding dasgurias.eu (tiny ecommerce for healthy brazilian sweets)
 
 - [See the **Live version** here](https://dasgurias.eu/)
 
@@ -49,12 +49,15 @@ Please execute that in order to be aware of what commands you might be able to r
 
 ## TO-DO
 
-- [ ] Update checkbox styles
+- [ ] Update ugly checkbox styles
 - [ ] Add form proper validation
 - [ ] Better error handling
   - Add form proper UI errors
   - Display correct error message on each field
 - [ ] Remove confusing console logs all over the form
+- [ ] Add google analytics
+- [ ] Add better admin UI (over private repository: [dasgurias-api](https://github.com/guicheffer/dasgurias-api))
+- [ ] Improve request data typing
 
 ## Learn More
 

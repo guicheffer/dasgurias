@@ -1,0 +1,48 @@
+@import './commons/styles/breakpoints.scss';
+
+$black: #000;
+$white: #FFF;
+
+.request {
+  margin: 10vh 0;
+  text-align: center;
+  width: 90%;
+
+  @media (min-width: $screen-sm-min) {
+    width: 70%;
+  }
+
+  p {
+    color: var(--text-color);
+  }
+
+  h1, h2 {
+    color: var(--secondary-color);
+    margin: 0;
+
+    small { color: var(--text-color); }
+  }
+
+  h1 { font-size: 30px; }
+
+  &__info {
+    &-account {
+      border-radius: 8px;
+      border: 1px solid var(--secondary-color);
+      margin: 30px 0 0;
+      padding: 12px;
+      text-align: left;
+
+      p { margin: 5px 0; }
+    }
+  }
+
+  &__congrats {
+    font-weight: 600;
+    margin-top: 50px;
+  }
+
+  &__warning { text-align: left; }
+
+  a { color: var(--secondary-color); }
+}

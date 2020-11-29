@@ -89,6 +89,20 @@ input:-webkit-autofill {
     flex-direction: row;
   }
 
+  &--newsletter {
+    color: var(--secondary-color);
+    text-align: right;
+    margin-top: 15px;
+    font-size: 10px;
+
+    input[type=checkbox] {
+      display: inline-block;
+      height: 8px;
+      vertical-align: middle;
+      width: 20px;
+    }
+  }
+
   &--different-address {
     display: block;
     margin-top: 20px;

@@ -1,4 +1,5 @@
 import React, { FunctionComponent, ReactElement } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import './Confirm.scss';
 import { DEFAULT_DELIVERIES, DELIVERIES_FEES, DELIVERIES_TITLES } from './DeliveryOptions';
@@ -8,24 +9,62 @@ import getCurrentPrice from './commons/utils/get-current-price';
 import { FormRequestData } from './Form';
 import { DEFAULT_COUNTRIES } from './Address';
 
+// TODO: Improve this, this is ridiculous haha
+export type RequestData = any;
+
 interface ConfirmProps {
   amount: Amount;
   formData: FormRequestData;
   selectedDeliveryOption: DEFAULT_DELIVERIES;
+  requestId: null | number;
+  requestIsLoading: Boolean;
 
+  handleCreateRequest: (requestData: RequestData) => void;
   stepBack: () => void;
-  stepFurther: () => void;
 };
 
 export const Confirm: FunctionComponent<ConfirmProps> = ({ children, ...props }): ReactElement => {
-  const { amount, formData, selectedDeliveryOption, stepBack, stepFurther } = props;
+  const { amount, formData, handleCreateRequest, requestId, requestIsLoading, selectedDeliveryOption, stepBack } = props;
 
   const deliveryAddress = (formData['different-address'] || formData.address) as AddressData;
   const deliveryName = formData['different-address'] ? deliveryAddress.name : formData.name;
 
+  const history = useHistory();
+
+  // TODO: I know, this is too fast – that's why ¯\_(ツ)_/¯
+  if (requestId) setTimeout(() => {
+    history.push(`/pedido/${requestId}`);
+  }, 2000);
+
+  const requestData = Object.assign({
+    brigadeiro: amount.brigadeiro,
+    name: formData.name,
+    email: formData.email,
+    instagram: formData.instagram,
+    newsletter: formData.newsletter,
+    delivery: selectedDeliveryOption,
+    price: getCurrentPrice(amount.total, DELIVERIES_FEES[selectedDeliveryOption], true),
+
+    country: formData.address.country,
+    extra: formData.address.extra,
+    num: formData.address.num,
+    street: formData.address.street,
+    town: formData.address.town,
+    zip: formData.address.zip,
+
+  }, formData['different-address'] ? {
+    deliveryName: (formData['different-address'] as AddressData).name,
+    deliveryStreet: (formData['different-address'] as AddressData).street,
+    deliveryNum: (formData['different-address'] as AddressData).num,
+    deliveryTown: (formData['different-address'] as AddressData).town,
+    deliveryZip: (formData['different-address'] as AddressData).zip,
+    deliveryCountry: (formData['different-address'] as AddressData).country,
+    deliveryExtra: (formData['different-address'] as AddressData).extra,
+  } : {});
+
   return (
     <>
-      <section className="confirm">
+      <section className="confirm" data-loading={requestIsLoading}>
         <p className="confirm__address">Endereço de entrega</p>
         <p className="confirm__address-name">{deliveryName}</p>
         <p className="confirm__address-street">{deliveryAddress.num} {deliveryAddress.street}</p>
@@ -49,7 +88,7 @@ export const Confirm: FunctionComponent<ConfirmProps> = ({ children, ...props })
 
       <div className="dasgurias--options">
         <button type="submit" className="dasgurias--cta danger" onClick={stepBack}> Voltar </button>
-        <button type="submit" className="dasgurias--cta" onClick={stepFurther}> Próximo </button>
+        <button type="submit" className="dasgurias--cta" disabled={!!requestIsLoading} onClick={() => handleCreateRequest(requestData)}> Confirmar </button>
       </div>
     </>
   );

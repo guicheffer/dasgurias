@@ -23,7 +23,7 @@ export const DEFAULT_COUNTRIES = {
 
 export const Address: FunctionComponent<AddressProps> = ({ children, ...props }): ReactElement => {
     const { formPrefix: rawFormPrefix = '' } = props;
-    const { register, errors } = useFormContext();
+    const { register } = useFormContext();
     const formPrefix = rawFormPrefix ? `${rawFormPrefix}.` : 'address.';
 
     return (

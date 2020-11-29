@@ -19,6 +19,7 @@ export interface FormRequestData {
   address: AddressData;
   email: string;
   instagram?: string;
+  newsletter: Boolean;
   name: string;
   "different-address": Boolean | AddressData;
 }
@@ -70,6 +71,13 @@ export const Form: FunctionComponent<FormProps> = ({ children, ...props }): Reac
             <div className="field">
               <input type="text" required ref={methods.register({ required: true, pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/ })} name="email" placeholder="E-mail"/>
               <span className="form--row--floating-label" data-error={methods.errors.email}>E-mail</span>
+
+              <div className="form--row form--row--newsletter">
+                <div className="field">
+                  <input type="checkbox" id="newsletter" name="newsletter" ref={methods.register} defaultChecked/>
+                  <label htmlFor="newsletter">Gostaria de receber emails com promoções, novidades, etc;</label>
+                </div>
+              </div>
             </div>
           </div>
 

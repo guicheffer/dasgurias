@@ -16,6 +16,8 @@ interface ChooseProductsProps {
   stepFurther: () => void;
 };
 
+// TODO: This is super hacky, haha – ideally, bringing these data from the api would be easier to understand what contents/products we have here
+
 export const ChooseProducts: FunctionComponent<ChooseProductsProps> = ({ children, ...props }): ReactElement => {
   const { amount, handleReactiveAmountRemove, handleReactiveAmountAdd, stepBack, stepFurther } = props;
 
