@@ -1,0 +1,3 @@
+[submodule "dasgurias-api"]
+	path = dasgurias-api
+	url = git@github.com:guicheffer/dasgurias-api.git
