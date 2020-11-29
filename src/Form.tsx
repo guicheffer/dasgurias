@@ -61,8 +61,8 @@ export const Form: FunctionComponent<FormProps> = ({ children, ...props }): Reac
         <form action="#" method="post" onSubmit={methods.handleSubmit(onSubmit)}>
           <div className="form--row">
             <div className="field">
-              <input type="text" required ref={methods.register({ required: true })} name="name" placeholder="Seu nome"/>
-              <span className="form--row--floating-label">Seu nome</span>
+              <input type="text" required ref={methods.register({ required: true })} name="name" placeholder="Seu nome completo"/>
+              <span className="form--row--floating-label">Seu nome completo</span>
             </div>
           </div>
 
@@ -89,7 +89,7 @@ export const Form: FunctionComponent<FormProps> = ({ children, ...props }): Reac
               <div className="form--row">
                 <div className="field">
                   <input autoComplete="no" required type="text" ref={methods.register({ required: true })} name="different-address.name" placeholder="Nome de entrega"/>
-                  <span className="form--row--floating-label">Nome de entrega</span>
+                  <span className="form--row--floating-label">Nome de entrega completo</span>
                 </div>
               </div>
 

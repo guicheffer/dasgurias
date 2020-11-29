@@ -29,7 +29,7 @@ function App() {
     total: 0,
   } as Amount);
 
-  const [selectedDeliveryOption, setSelectedDeliveryOption] = useState(DEFAULT_DELIVERIES.dhl);
+  const [selectedDeliveryOption, setSelectedDeliveryOption] = useState(DEFAULT_DELIVERIES.custom);
 
   const hasFormData = useMemo(() => !!Object.values(formData).length, [formData]);
 
@@ -98,10 +98,10 @@ function App() {
         <Switch>
           <Route exact path="/" render={() => <Redirect to="/pedir" />} />
           <Route exact path="/pedir" render={() => !isFormRequested && <button onClick={handleRequest} className="dasgurias--cta"> Quero pedir </button>} />
-          <Route path="/pedir/1" render={() => isFormRequested && <Form formData={formData as FormRequestData} visible={!!isFormVisible} handleFormSubmit={handleFormSubmit} /> || <Redirect to="/pedir" /> } />
-          <Route path="/pedir/2" render={() => hasFormData && <ChooseProducts amount={amount} handleReactiveAmountAdd={handleReactiveAmountAdd} handleReactiveAmountRemove={handleReactiveAmountRemove} stepBack={stepBack} stepFurther={stepFurther}/> || <Redirect to="/pedir" /> } />
-          <Route path="/pedir/3" render={() => hasFormData && <DeliveryOptions amount={amount} handleChooseDeliveryOption={handleChooseDeliveryOption} selectedDeliveryOption={selectedDeliveryOption} stepBack={stepBack} stepFurther={stepFurther}/> || <Redirect to="/pedir" /> } />
-          <Route path="/pedir/4" render={() => hasFormData && <Confirm amount={amount} formData={formData as FormRequestData} selectedDeliveryOption={selectedDeliveryOption} stepBack={stepBack} stepFurther={stepFurther}/> || <Redirect to="/pedir" /> } />
+          <Route path="/pedir/1" render={() => (isFormRequested && <Form formData={formData as FormRequestData} visible={!!isFormVisible} handleFormSubmit={handleFormSubmit} />) || <Redirect to="/pedir" /> } />
+          <Route path="/pedir/2" render={() => (hasFormData && <ChooseProducts amount={amount} handleReactiveAmountAdd={handleReactiveAmountAdd} handleReactiveAmountRemove={handleReactiveAmountRemove} stepBack={stepBack} stepFurther={stepFurther}/>) || <Redirect to="/pedir" /> } />
+          <Route path="/pedir/3" render={() => (hasFormData && <DeliveryOptions amount={amount} handleChooseDeliveryOption={handleChooseDeliveryOption} selectedDeliveryOption={selectedDeliveryOption} stepBack={stepBack} stepFurther={stepFurther}/>) || <Redirect to="/pedir" /> } />
+          <Route path="/pedir/4" render={() => (hasFormData && <Confirm amount={amount} formData={formData as FormRequestData} selectedDeliveryOption={selectedDeliveryOption} stepBack={stepBack} stepFurther={stepFurther}/>) || <Redirect to="/pedir" /> } />
         </Switch>
       </div>
     </div>

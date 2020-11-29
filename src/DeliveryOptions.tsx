@@ -26,7 +26,7 @@ export enum DEFAULT_DELIVERIES {
 export enum DELIVERIES_FEES {
   custom = 1.50,
   dhl = 3.90,
-  external = 5,
+  external = 10,
 }
 
 export enum DELIVERIES_TITLES {
@@ -43,22 +43,22 @@ export const DeliveryOptions: FunctionComponent<DeliveryOptionsProps> = ({ child
       <section className="delivery-options">
         <nav className="delivery-options__choose">
           <ul>
-            <li data-selected={selectedDeliveryOption === DEFAULT_DELIVERIES.dhl} data-value={DEFAULT_DELIVERIES.dhl} onClick={handleChooseDeliveryOption}>
-              <FontAwesomeIcon icon={faDhl}/>
-
-              <section className="delivery-options__info">
-                <h2>{DELIVERIES_TITLES.dhl}</h2>
-                <p className="delivery-options__info-description">apenas para <strong>Berlim</strong> e <strong>Alemanha</strong></p>
-                <p className="delivery-options__info-price">€ 3,90</p>
-              </section>
-            </li>
             <li data-selected={selectedDeliveryOption === DEFAULT_DELIVERIES.custom} data-value={DEFAULT_DELIVERIES.custom} onClick={handleChooseDeliveryOption}>
               <FontAwesomeIcon icon={faPeopleCarry}/>
 
               <section className="delivery-options__info">
                 <h2>{DELIVERIES_TITLES.custom}</h2>
                 <p className="delivery-options__info-description">apenas para <strong>Berlim</strong>, dentro da área do Ring-Bahn (S41/S42) – das <strong>8h às 19h</strong></p>
-                <p className="delivery-options__info-price">€ 1,50</p>
+                <p className="delivery-options__info-price">{DELIVERIES_FEES.custom.toLocaleString('pt-BR', { style: 'currency', currency: 'eur' })}</p>
+              </section>
+            </li>
+            <li data-selected={selectedDeliveryOption === DEFAULT_DELIVERIES.dhl} data-value={DEFAULT_DELIVERIES.dhl} onClick={handleChooseDeliveryOption}>
+              <FontAwesomeIcon icon={faDhl}/>
+
+              <section className="delivery-options__info">
+                <h2>{DELIVERIES_TITLES.dhl}</h2>
+                <p className="delivery-options__info-description">apenas para <strong>Berlim</strong> e <strong>Alemanha</strong></p>
+                <p className="delivery-options__info-price">{DELIVERIES_FEES.dhl.toLocaleString('pt-BR', { style: 'currency', currency: 'eur' })}</p>
               </section>
             </li>
             <li data-selected={selectedDeliveryOption === DEFAULT_DELIVERIES.external} data-value={DEFAULT_DELIVERIES.external} onClick={handleChooseDeliveryOption}>
@@ -67,7 +67,7 @@ export const DeliveryOptions: FunctionComponent<DeliveryOptionsProps> = ({ child
               <section className="delivery-options__info">
                 <h2>{DELIVERIES_TITLES.external}</h2>
                 <p className="delivery-options__info-description">entraremos em contato para informarmos o valor e disponibilidade</p>
-                <p className="delivery-options__info-price">€ 5</p>
+                <p className="delivery-options__info-price">{DELIVERIES_FEES.external.toLocaleString('pt-BR', { style: 'currency', currency: 'eur' })}</p>
               </section>
             </li>
           </ul>

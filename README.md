@@ -2,7 +2,7 @@
 
 Codebase for website regarding dasgurias.eu (tiny marketplace for healthy brazilian sweets)
 
-- [The **Demo version** here](https://dasgurias.eu/)
+- [See the **Live version** here](https://dasgurias.eu/)
 
 ## Summary
 
