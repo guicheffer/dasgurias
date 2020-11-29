@@ -4,7 +4,7 @@ $black: #000;
 $white: #FFF;
 
 .confirm {
-  margin: 15vh 0;
+  margin: 10vh 0;
   width: 90%;
 
   @media (min-width: $screen-sm-min) {
@@ -18,9 +18,12 @@ $white: #FFF;
 
   &__address,
   &__delivery,
+  &__total,
   &__quantity {
     color: var(--secondary-color) !important;
     font-weight: 500;
     margin-bottom: 5px !important;
   }
+
+  &__total-text { font-weight: 800; }
 }

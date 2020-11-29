@@ -29,7 +29,7 @@ export enum DELIVERIES_FEES {
 }
 
 export enum DELIVERIES_TITLES {
-  custom = "Entrga DasGurias",
+  custom = "Entrega DasGurias",
   dhl = "Envio via DHL",
   external = "Demais países da UE",
 }

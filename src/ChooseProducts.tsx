@@ -24,7 +24,7 @@ export const ChooseProducts: FunctionComponent<ChooseProductsProps> = ({ childre
         <section className="choose-products__current-price"> {getCurrentPrice(amount)} <small>*</small> </section>
 
         <figure className="choose-products-image-container">
-          <img className="choose-products-image" src="./small-brigadeiro-transparent.png" alt="Brigadeiro Tradicional"/>
+          <img className="choose-products-image" src="/small-brigadeiro-transparent.png" alt="Brigadeiro Tradicional"/>
 
           <nav className="choose-products__quantity">
             <button className="choose-products__quantity-button" type="button" onClick={handleReactiveAmountRemove} disabled={amount < 2}>
@@ -42,7 +42,6 @@ export const ChooseProducts: FunctionComponent<ChooseProductsProps> = ({ childre
         <p className="choose-products__quantity--explanation">
           * 1 unidade = € 6,90 + frete<br/>
           * 2 unidades = € 6,90 + frete<br/>
-          * 3 unidades = € 18,90 + frete<br/>
           * a partir de 3 unidades = € 6,30 cada + frete<br/>
         </p>
       </section>

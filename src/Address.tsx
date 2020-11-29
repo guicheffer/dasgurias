@@ -5,6 +5,22 @@ interface AddressProps {
     formPrefix?: string;
 };
 
+const DEFAULT_COUNTRY = 'germany';
+export const DEFAULT_COUNTRIES = {
+  [DEFAULT_COUNTRY]: 'Alemanha',
+  austria: 'Áustria',
+  cyprus: 'Chipre (exceto parte norte)',
+  denmark: 'Dinamarca (exceto Ilhas Faroé e Groenlândia)',
+  finland: 'Finlândia (exceto Ilhas Åland)',
+  france: 'França (exceto territórios e departamentos ultramarinos)',
+  gb: 'Grã-Bretanha (exceto Ilhas do Canal)',
+  greece: 'Grécia (exceto Monte Athos)',
+  holland: 'Holanda (exceto áreas não europeias)',
+  italy: 'Itália (exceto Livigno e Campione d\'Italia)',
+  netherlands: 'Países Baixos',
+  spain: 'Espanha (exceto Ilhas Canárias, Ceuta e Melilla)',
+} as { [key: string]: string };
+
 export const Address: FunctionComponent<AddressProps> = ({ children, ...props }): ReactElement => {
     const { formPrefix: rawFormPrefix = '' } = props;
     const { register, errors } = useFormContext();
@@ -47,18 +63,7 @@ export const Address: FunctionComponent<AddressProps> = ({ children, ...props })
           <div className="form--row">
               <div className="field">
                   <select ref={register} name={`${formPrefix}country`} id="country" defaultValue="germany">
-                  <option value="germany"> Alemanha </option>
-                  <option value="austria"> Áustria </option>
-                  <option value="cyprus"> Chipre (exceto parte norte) </option>
-                  <option value="denmark"> Dinamarca (exceto Ilhas Faroé e Groenlândia) </option>
-                  <option value="spain"> Espanha (exceto Ilhas Canárias, Ceuta e Melilla) </option>
-                  <option value="finland"> Finlândia (exceto Ilhas Åland) </option>
-                  <option value="france"> França (exceto territórios e departamentos ultramarinos) </option>
-                  <option value="great-britain"> Grã-Bretanha (exceto Ilhas do Canal) </option>
-                  <option value="greece"> Grécia (exceto Monte Athos) </option>
-                  <option value="holland"> Holanda (exceto áreas não europeias) </option>
-                  <option value="italy"> Itália (exceto Livigno e Campione d'Italia) </option>
-                  <option value="countries"> Países Baixos </option>
+                    {Object.keys(DEFAULT_COUNTRIES).map((countryKey: string) => (<option key={countryKey} value={countryKey}> {DEFAULT_COUNTRIES[countryKey]} </option>))}
                   </select>
               </div>
           </div>
