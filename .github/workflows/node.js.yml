@@ -5,9 +5,9 @@ name: CI to S3
 
 on:
   push:
-    branches: [ me ]
+    branches: [ master ]
   pull_request:
-    branches: [ me ]
+    branches: [ master ]
 
 jobs:
   build:
