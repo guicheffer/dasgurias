@@ -64,11 +64,12 @@ $white: #FFF;
 
     &-price {
       color: var(--highlight-color);
+      font-size: 10px;
       font-weight: 500;
       margin: 0;
       position: absolute;
-      right: 5px;
-      top: 5px;
+      right: -10px;
+      top: -5px;
     }
   }
 
