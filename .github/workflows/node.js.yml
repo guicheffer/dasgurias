@@ -46,7 +46,7 @@ jobs:
       with:
         dest-s3-bucket: dasgurias.eu
         # cloudfront-id-to-invalidate: E2XMCUFDH56QSJ
-        public-source-path: ./public/
+        public-source-path: ./build/
     - uses: actions/checkout@master
     - name: Send custom message with args
       uses: appleboy/telegram-action@master
