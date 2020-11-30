@@ -60,6 +60,7 @@ Please execute that in order to be aware of what commands you might be able to r
 - [ ] Improve request data typing
 - [ ] Add correct api redirect
 - [ ] Make a better `Makefile` for migrations on SQL
+- [ ] Check why elastic beanstalk has lately been failing on distributing from S3 bucket into EC2s
 
 ## Learn More
 
