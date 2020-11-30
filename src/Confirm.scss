@@ -18,7 +18,7 @@ $white: #FFF;
       background-image: url("./commons/images/loading.gif");
       background-position: 50% 50%;
       background-repeat: no-repeat;
-      background-size: 50%;
+      background-size: 20%;
       content: '';
       height: 100%;
       left: 50%;
@@ -45,4 +45,8 @@ $white: #FFF;
   }
 
   &__total-text { font-weight: 800; }
+
+  form {
+    margin-top: 20px;
+  }
 }

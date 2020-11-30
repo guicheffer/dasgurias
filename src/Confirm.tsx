@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement } from 'react';
+import React, { FunctionComponent, ReactElement, useCallback, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import './Confirm.scss';
@@ -31,6 +31,20 @@ export const Confirm: FunctionComponent<ConfirmProps> = ({ children, ...props })
 
   const history = useHistory();
 
+  // TODO: voucherTenApplied – super hacky!
+  const [voucherTenApplied, setVoucherTenApplied] = useState(false);
+  const handleDiscount = useCallback((event: any) => {
+    const { voucher } = Object.fromEntries(new FormData(event.target).entries());
+
+    if ((voucher as string).match(/(c|C)\d{2,3}$/g)) {
+      setVoucherTenApplied(true);
+    } else {
+      window.alert("Código não válido!");
+    }
+
+    event.preventDefault();
+  }, []);
+
   // TODO: I know, this is too fast – that's why ¯\_(ツ)_/¯
   if (requestId) setTimeout(() => {
     history.push(`/pedido/${requestId}`);
@@ -43,7 +57,7 @@ export const Confirm: FunctionComponent<ConfirmProps> = ({ children, ...props })
     instagram: formData.instagram,
     newsletter: formData.newsletter,
     delivery: selectedDeliveryOption,
-    price: getCurrentPrice(amount.total, DELIVERIES_FEES[selectedDeliveryOption], true),
+    price: getCurrentPrice(amount.total, DELIVERIES_FEES[selectedDeliveryOption], true, voucherTenApplied),
 
     country: formData.address.country,
     extra: formData.address.extra,
@@ -83,7 +97,16 @@ export const Confirm: FunctionComponent<ConfirmProps> = ({ children, ...props })
 
         <br/> <br/>
         <p className="confirm__total">Valor total</p>
-        <p className="confirm__total-text">{getCurrentPrice(amount.total, DELIVERIES_FEES[selectedDeliveryOption])}</p>
+        <p className="confirm__total-text">{getCurrentPrice(amount.total, DELIVERIES_FEES[selectedDeliveryOption], false, voucherTenApplied)} {voucherTenApplied && <small> (desconto de 10% aplicado) </small>}</p>
+
+        {!voucherTenApplied && <form action="#" method="GET" onSubmit={handleDiscount}>
+          <div className="form--row">
+            <div className="field">
+                <input type="text" placeholder="código de desconto" name="voucher" data-show-placeholder/>
+                <button type="submit" className="dasgurias--cta danger"> aplicar </button>
+            </div>
+          </div>
+        </form>}
       </section>
 
       <div className="dasgurias--options">

@@ -49,8 +49,8 @@ Please execute that in order to be aware of what commands you might be able to r
 
 ## TO-DO
 
+- [x] Add form "proper" validation
 - [ ] Update ugly checkbox styles
-- [ ] Add form proper validation
 - [ ] Better error handling
   - Add form proper UI errors
   - Display correct error message on each field
@@ -58,6 +58,8 @@ Please execute that in order to be aware of what commands you might be able to r
 - [ ] Add google analytics
 - [ ] Add better admin UI (over private repository: [dasgurias-api](https://github.com/guicheffer/dasgurias-api))
 - [ ] Improve request data typing
+- [ ] Add correct api redirect
+- [ ] Make a better `Makefile` for migrations on SQL
 
 ## Learn More
 

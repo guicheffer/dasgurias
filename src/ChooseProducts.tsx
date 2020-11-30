@@ -48,7 +48,7 @@ export const ChooseProducts: FunctionComponent<ChooseProductsProps> = ({ childre
 
         <p className="choose-products__quantity--explanation">
           * 1 unidade = € 6,90 + frete<br/>
-          * 2 unidades = € 6,90 + frete<br/>
+          * 2 unidades = € 6,45 cada + frete<br/>
           * a partir de 3 unidades = € 6,30 cada + frete<br/>
         </p>
       </section>

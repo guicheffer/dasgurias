@@ -11,7 +11,7 @@ import { DEFAULT_DELIVERIES, DeliveryOptions } from './DeliveryOptions';
 import { Confirm, RequestData } from './Confirm';
 import Axios from 'axios';
 
-const baseURL = process.env.NODE_ENV === 'production' ? 'https://api.dasgurias.eu' : 'http://127.0.0.1:8000';
+const baseURL = process.env.NODE_ENV === 'production' ? 'https://admin.dasgurias.eu' : 'http://127.0.0.1:8000';
 
 const axios = Axios.create({
   baseURL: `${baseURL}/`,
@@ -115,7 +115,7 @@ function App() {
     } else {
       history.push(`/pedido/${requestId}`);
     }
-  }, [requestId]);
+  }, [history, requestId]);
 
   const successfullyLoadedRequest = useCallback(() => {
     setIsContentRequested(true);

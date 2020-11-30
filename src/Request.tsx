@@ -56,7 +56,7 @@ export const Request: FunctionComponent<RequestProps> = ({ children, ...props })
   return (
     <>
       <section className="request">
-        <h1><small>status do pedido<small>**</small>: </small>{STATUS_DESCRIPTION[STATUS_MAP[(requestProps as ExpectedPayload).status]] || "não encontrado"}</h1>
+        <h1><small>status do pedido<small>*</small>: </small>{STATUS_DESCRIPTION[STATUS_MAP[(requestProps as ExpectedPayload).status]] || "não encontrado"}</h1>
         <h2><small>número do pedido: </small>{requestId}</h2>
 
         {requestProps && STATUS_MAP[(requestProps as ExpectedPayload).status] === DEFAULT_STATUS.PENDING && (
@@ -70,11 +70,11 @@ export const Request: FunctionComponent<RequestProps> = ({ children, ...props })
               <p>IBAN: <strong>DE96100110012622414232</strong></p>
               <p>BIC: <strong>NTSBDEB1XXX</strong></p>
               <p>Banco: <strong>N26</strong></p>
-              <p>Número de Referência<small>*</small>: <strong>{requestId}</strong></p>
+              <p>Número de Referência<small>**</small>: <strong>{requestId}</strong></p>
             </aside>
 
-            <p className="request__warning">* não esqueça de colocar o número de referência (número do pedido) na transferência para identificarmos sua compra!</p>
-            <p className="request__warning">** o status do pedido pode demorar até 48h para ser atualizado;</p>
+            <p className="request__warning">* o status do pedido pode demorar até 48h para ser atualizado;</p>
+            <p className="request__warning">** não esqueça de colocar o número de referência (número do pedido) na transferência para identificarmos sua compra!</p>
           </div>
         )}
 
