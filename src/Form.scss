@@ -20,6 +20,8 @@ input:-webkit-autofill {
 }
 
 .form--row {
+  overflow: hidden;
+
   .field {
     position: relative;
     width: 100%;
@@ -56,6 +58,7 @@ input:-webkit-autofill {
     border-bottom: 1px solid $form-color;
     width: 100%;
 
+    &::placeholder { font-size: 15px; }
     &:not([data-show-placeholder])::placeholder {
       visibility: hidden;
     }
@@ -67,9 +70,9 @@ input:-webkit-autofill {
     &:focus + .form--row--floating-label,
     &:not(:focus):valid[type=text] + .form--row--floating-label {
       bottom: 10px;
-      font-size: 11px;
+      font-size: 10px;
       opacity: 1;
-      top: -8px;
+      top: -3px;
     }
   }
 
@@ -80,6 +83,7 @@ input:-webkit-autofill {
     position: absolute;
     top: 10px;
     transition: 0.2s ease all;
+    font-size: 15px;
 
     &[data-error] { color: red; }
   }
@@ -89,11 +93,14 @@ input:-webkit-autofill {
     flex-direction: row;
   }
 
+  &--email { overflow: visible; }
+
   &--newsletter {
     color: var(--secondary-color);
-    text-align: right;
-    margin-top: 15px;
     font-size: 10px;
+    margin-bottom: -40px;
+    margin-top: 15px;
+    text-align: right;
 
     input[type=checkbox] {
       display: inline-block;

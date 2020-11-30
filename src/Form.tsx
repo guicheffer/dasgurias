@@ -67,7 +67,7 @@ export const Form: FunctionComponent<FormProps> = ({ children, ...props }): Reac
             </div>
           </div>
 
-          <div className="form--row">
+          <div className="form--row form--row--email">
             <div className="field">
               <input type="text" required ref={methods.register({ required: true, pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/ })} name="email" placeholder="E-mail"/>
               <span className="form--row--floating-label" data-error={methods.errors.email}>E-mail</span>
@@ -83,7 +83,7 @@ export const Form: FunctionComponent<FormProps> = ({ children, ...props }): Reac
 
           <div className="form--row">
             <div className="field">
-              <input type="text" ref={methods.register} name="instagram" placeholder="Instagram (ex. @dasguriaseu)" data-show-placeholder/>
+              <input type="text" ref={methods.register} name="instagram" placeholder="Instagram (opcional, ex. @dasguriaseu)" data-show-placeholder/>
             </div>
           </div>
 

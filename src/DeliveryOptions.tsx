@@ -25,7 +25,7 @@ export enum DEFAULT_DELIVERIES {
 
 export enum DELIVERIES_FEES {
   custom = 1.50,
-  dhl = 3.90,
+  dhl = 5,
   external = 10,
 }
 

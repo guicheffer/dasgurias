@@ -39,7 +39,7 @@ export const ChooseProducts: FunctionComponent<ChooseProductsProps> = ({ childre
 
               <span className="choose-products__quantity--amount"> {amount.brigadeiro} </span>
 
-              <button className="choose-products__quantity-button" type="button" data-type="brigadeiro" onClick={handleReactiveAmountAdd} disabled={amount.brigadeiro >= 10}>
+              <button className="choose-products__quantity-button" type="button" data-type="brigadeiro" onClick={handleReactiveAmountAdd} disabled={amount.brigadeiro >= 6}>
                 <FontAwesomeIcon className="choose-products__quantity-plus" icon={faPlus}/>
               </button>
             </nav>

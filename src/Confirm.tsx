@@ -31,19 +31,19 @@ export const Confirm: FunctionComponent<ConfirmProps> = ({ children, ...props })
 
   const history = useHistory();
 
+  const [voucherValue, setVoucherValue] = useState('');
+
   // TODO: voucherTenApplied – super hacky!
   const [voucherTenApplied, setVoucherTenApplied] = useState(false);
   const handleDiscount = useCallback((event: any) => {
-    const { voucher } = Object.fromEntries(new FormData(event.target).entries());
-
-    if ((voucher as string).match(/(c|C)\d{2,3}$/g)) {
+    if (voucherValue.match(/(c|C)\d{2,3}$/g)) {
       setVoucherTenApplied(true);
     } else {
       window.alert("Código não válido!");
     }
 
     event.preventDefault();
-  }, []);
+  }, [voucherValue]);
 
   // TODO: I know, this is too fast – that's why ¯\_(ツ)_/¯
   if (requestId) setTimeout(() => {
@@ -102,8 +102,8 @@ export const Confirm: FunctionComponent<ConfirmProps> = ({ children, ...props })
         {!voucherTenApplied && <form action="#" method="GET" onSubmit={handleDiscount}>
           <div className="form--row">
             <div className="field">
-                <input type="text" placeholder="código de desconto" name="voucher" data-show-placeholder/>
-                <button type="submit" className="dasgurias--cta danger"> aplicar </button>
+                <input type="text" onChange={(e) => setVoucherValue(e.target.value)} value={voucherValue} placeholder="código de desconto" name="voucher" data-show-placeholder/>
+                <button type="submit" className="dasgurias--cta danger" disabled={!voucherValue}> aplicar </button>
             </div>
           </div>
         </form>}

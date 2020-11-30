@@ -24,7 +24,7 @@ $white: #FFF;
   &__current-price {
     color: var(--hover-color);
     cursor: default;
-    font-size: 6vw;
+    font-size: 5vw;
     font-weight: 500;
     margin: 2vh auto;
     text-align: center;
@@ -90,7 +90,7 @@ $white: #FFF;
 
     &--explanation {
       color: var(--secondary-color);
-      font-size: 10px;
+      font-size: 12px;
       text-align: center;
       user-select: none;
     }
