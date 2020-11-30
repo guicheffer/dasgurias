@@ -49,7 +49,7 @@ export const Request: FunctionComponent<RequestProps> = ({ children, ...props })
     axiosInstance.get(`/request/${requestId}`).then(({ data }) => {
       setRequestProps(data);
     });
-  }, [])
+  }, [axiosInstance, requestId, successfullyLoadedRequest])
 
   const history = useHistory();
 
@@ -92,7 +92,7 @@ export const Request: FunctionComponent<RequestProps> = ({ children, ...props })
 
         {requestProps && STATUS_MAP[(requestProps as ExpectedPayload).status] === DEFAULT_STATUS.DELIVERED && (
           <div className="request__info">
-            <p className="request__congrats">O(s) seu(s) produto(s) foi(oram) entregue(s). Agora não deixe de nos acompanhar no instagram <a target="_blank" href="https://www.instagram.com/dasguriaseu/">@dasguriaseu</a> e compartilhar sua experiência! ❤️</p>
+            <p className="request__congrats">O(s) seu(s) produto(s) foi(oram) entregue(s). Agora não deixe de nos acompanhar no instagram <a target="_blank" rel="noreferrer" href="https://www.instagram.com/dasguriaseu/">@dasguriaseu</a> e compartilhar sua experiência! ❤️</p>
           </div>
         )}
       </section>

@@ -11,9 +11,9 @@ const dasguriasRoot = document.getElementById('dasgurias');
 
 ReactDOM.render(
   <React.StrictMode>
-    <header role="header" className="header">
-      <nav role="navigation">
-        <a href="#" onClick={(e) => { window.alert('The page is only available in brazillian portuguese for now!'); e.preventDefault(); }}>🇧🇷 &nbsp; PT</a>
+    <header className="header">
+      <nav>
+        <a href="/" onClick={(e) => { window.alert('The page is only available in brazillian portuguese for now!'); e.preventDefault(); }}>🇧🇷 &nbsp; PT</a>
       </nav>
     </header>
 
@@ -21,7 +21,7 @@ ReactDOM.render(
       <Route path="/" component={App} />
     </Router>
 
-    <footer role="footer" className="footer">
+    <footer className="footer">
       © <strong>DasGurias</strong> - Doces Brasileiros Saudáveis - , 2020
     </footer>
   </React.StrictMode>,
