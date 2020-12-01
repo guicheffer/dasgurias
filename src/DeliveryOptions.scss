@@ -6,6 +6,7 @@ $white: #FFF;
 // TODO: Remove static sizes from css (terrible! 😛)
 
 .delivery-options {
+  margin-top: 5vh;
   width: 100%;
 
   @media (min-width: $screen-sm-min) {

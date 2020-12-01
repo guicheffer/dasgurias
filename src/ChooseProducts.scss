@@ -2,6 +2,8 @@ $black: #000;
 $white: #FFF;
 
 .choose-products {
+  margin-top: 2vh;
+
   &-image {
     user-select: none;
     min-height: 30vh;
