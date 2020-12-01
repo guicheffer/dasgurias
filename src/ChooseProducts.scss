@@ -4,6 +4,7 @@ $white: #FFF;
 .choose-products {
   &-image {
     user-select: none;
+    min-height: 30vh;
     width: 30vh;
 
     &-container {

@@ -1,9 +1,9 @@
 import React, { FunctionComponent, ReactElement, useEffect, useRef, useState } from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
 
 import './Form.scss';
 
 import { Address } from './Address';
-import { FormProvider, useForm } from 'react-hook-form';
 
 export interface AddressData {
   country: string;
@@ -29,10 +29,12 @@ interface FormProps {
   handleFormSubmit: (formData: FormRequestData) => void;
 
   visible: Boolean;
+
+  stepBack: (rawFormData?: FormRequestData) => any;
 }
 
 export const Form: FunctionComponent<FormProps> = ({ children, ...props }): ReactElement => {
-  const { formData, handleFormSubmit, visible } = props;
+  const { formData, handleFormSubmit, stepBack, visible } = props;
   const methods = useForm({ defaultValues: formData });
 
   const onSubmit = (data: FormRequestData) => handleFormSubmit(data);
@@ -106,6 +108,7 @@ export const Form: FunctionComponent<FormProps> = ({ children, ...props }): Reac
           </div>
 
           <div className="dasgurias--options">
+            <button type="button" className="dasgurias--cta danger" onClick={() => stepBack(methods.getValues())}> Voltar </button>
             <button type="submit" disabled={!!Object.keys(methods.errors).length} className="dasgurias--cta"> Próximo </button>
           </div>
         </form>

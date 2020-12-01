@@ -45,11 +45,10 @@ function App() {
 
   const hasFormData = useMemo(() => !!Object.values(formData).length, [formData]);
 
-  const handleRequest = useCallback(() => {
+  const handleFirstRequest = useCallback(() => {
     setIsContentRequested(true);
 
     setTimeout(() => {
-      setIsFormVisible(true);
       setRequestStep(1);
       history.push('/pedir/1');
     }, 500);
@@ -60,13 +59,15 @@ function App() {
     setIsFormVisible(false);
 
     setTimeout(() => {
-      setRequestStep(2);
+      setRequestStep(3);
       setIsFormVisible(true);
-      history.push('/pedir/2');
+      history.push('/pedir/3');
     }, 400);
   }, [history]);
 
-  const stepBack = useCallback(() => {
+  const stepBack = useCallback((rawFormData?: FormRequestData) => {
+    if (rawFormData?.name) setFormData(rawFormData);
+
     const nextRequestStep = requestStep - 1;
 
     setRequestStep(nextRequestStep);
@@ -74,6 +75,8 @@ function App() {
   }, [history, requestStep]);
 
   const stepFurther = useCallback(() => {
+    if (requestStep === 1) setIsFormVisible(true);
+
     const nextRequestStep = requestStep + 1;
 
     setRequestStep(nextRequestStep);
@@ -129,10 +132,10 @@ function App() {
         <Switch>
           <Route exact path="/" render={() => <Redirect to="/pedir" />} />
 
-          <Route exact path="/pedir" render={() => !isContentRequested && <button onClick={handleRequest} className="dasgurias--cta"> Quero pedir </button>} />
+          <Route exact path="/pedir" render={() => !isContentRequested && <button onClick={handleFirstRequest} className="dasgurias--cta"> Quero pedir </button>} />
 
-          <Route path="/pedir/1" render={() => (isContentRequested && <Form formData={formData as FormRequestData} visible={!!isFormVisible} handleFormSubmit={handleFormSubmit} />) || <Redirect to="/pedir" /> } />
-          <Route path="/pedir/2" render={() => (hasFormData && <ChooseProducts amount={amount} handleReactiveAmountAdd={handleReactiveAmountAdd} handleReactiveAmountRemove={handleReactiveAmountRemove} stepBack={stepBack} stepFurther={stepFurther}/>) || <Redirect to="/pedir" /> } />
+          <Route path="/pedir/1" render={() => (isContentRequested && <ChooseProducts amount={amount} handleReactiveAmountAdd={handleReactiveAmountAdd} handleReactiveAmountRemove={handleReactiveAmountRemove} stepFurther={stepFurther}/>) || <Redirect to="/pedir" /> } />
+          <Route path="/pedir/2" render={() => (amount.total && <Form formData={formData as FormRequestData} visible={!!isFormVisible} stepBack={stepBack} handleFormSubmit={handleFormSubmit} />) || <Redirect to="/pedir" /> } />
           <Route path="/pedir/3" render={() => (hasFormData && <DeliveryOptions amount={amount} handleChooseDeliveryOption={handleChooseDeliveryOption} selectedDeliveryOption={selectedDeliveryOption} stepBack={stepBack} stepFurther={stepFurther}/>) || <Redirect to="/pedir" /> } />
           <Route path="/pedir/4" render={() => (hasFormData && <Confirm requestId={requestId} requestIsLoading={requestIsLoading} handleCreateRequest={handleCreateRequest} amount={amount} formData={formData as FormRequestData} selectedDeliveryOption={selectedDeliveryOption} stepBack={stepBack}/>) || <Redirect to="/pedir" /> } />
 

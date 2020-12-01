@@ -12,14 +12,13 @@ interface ChooseProductsProps {
   handleReactiveAmountAdd: (event: any) => void;
   handleReactiveAmountRemove: (event: any) => void;
 
-  stepBack: () => void;
   stepFurther: () => void;
 };
 
 // TODO: This is super hacky, haha – ideally, bringing these data from the api would be easier to understand what contents/products we have here
 
 export const ChooseProducts: FunctionComponent<ChooseProductsProps> = ({ children, ...props }): ReactElement => {
-  const { amount, handleReactiveAmountRemove, handleReactiveAmountAdd, stepBack, stepFurther } = props;
+  const { amount, handleReactiveAmountRemove, handleReactiveAmountAdd, stepFurther } = props;
 
   return (
     <>
@@ -54,7 +53,6 @@ export const ChooseProducts: FunctionComponent<ChooseProductsProps> = ({ childre
       </section>
 
       <div className="dasgurias--options">
-        <button type="submit" className="dasgurias--cta danger" onClick={stepBack}> Voltar </button>
         <button type="submit" className="dasgurias--cta" onClick={stepFurther} disabled={amount.total < 1}> Próximo </button>
       </div>
     </>
