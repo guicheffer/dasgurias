@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement, useCallback, useState } from 'react';
+import React, { FunctionComponent, ReactElement, useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import './Confirm.scss';
@@ -25,6 +25,14 @@ interface ConfirmProps {
 
 export const Confirm: FunctionComponent<ConfirmProps> = ({ children, ...props }): ReactElement => {
   const { amount, formData, handleCreateRequest, requestId, requestIsLoading, selectedDeliveryOption, stepBack } = props;
+
+  useEffect(() => {
+    //@ts-ignore
+    window.gtag('event', 'page_view', {
+      page_title: 'Confirm',
+      page_path: '/pedir/4',
+    });
+  }, []);
 
   const deliveryAddress = (formData['different-address'] || formData.address) as AddressData;
   const deliveryName = formData['different-address'] ? deliveryAddress.name : formData.name;

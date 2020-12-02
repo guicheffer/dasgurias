@@ -56,6 +56,12 @@ export const Form: FunctionComponent<FormProps> = ({ children, ...props }): Reac
   useEffect(() => {
     //@ts-ignore
     document.querySelectorAll('input[type=text]')[0].focus();
+
+    //@ts-ignore
+    window.gtag('event', 'page_view', {
+      page_title: 'Fill form',
+      page_path: '/pedir/2',
+    });
   }, []);
 
   return (

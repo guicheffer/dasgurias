@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement } from 'react';
+import React, { FunctionComponent, ReactElement, useEffect } from 'react';
 
 import './ChooseProducts.scss';
 import { Amount } from './App';
@@ -19,6 +19,14 @@ interface ChooseProductsProps {
 
 export const ChooseProducts: FunctionComponent<ChooseProductsProps> = ({ children, ...props }): ReactElement => {
   const { amount, handleReactiveAmountRemove, handleReactiveAmountAdd, stepFurther } = props;
+
+  useEffect(() => {
+    //@ts-ignore
+    window.gtag('event', 'page_view', {
+      page_title: 'Choose Product',
+      page_path: '/pedir/1',
+    });
+  }, []);
 
   return (
     <>

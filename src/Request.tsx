@@ -44,6 +44,12 @@ export const Request: FunctionComponent<RequestProps> = ({ children, ...props })
   const [requestProps, setRequestProps] = useState<{} | ExpectedPayload>({});
 
   useEffect(() => {
+    //@ts-ignore
+    window.gtag('event', 'page_view', {
+      page_title: 'See request details',
+      page_path: `/pedido/${requestId}`,
+    });
+
     successfullyLoadedRequest();
 
     axiosInstance.get(`/request/${requestId}`).then(({ data }) => {

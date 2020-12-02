@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement } from 'react';
+import React, { FunctionComponent, ReactElement, useEffect } from 'react';
 
 import './DeliveryOptions.scss';
 import { Amount } from './App';
@@ -37,6 +37,14 @@ export enum DELIVERIES_TITLES {
 
 export const DeliveryOptions: FunctionComponent<DeliveryOptionsProps> = ({ children, ...props }): ReactElement => {
   const { amount, handleChooseDeliveryOption, selectedDeliveryOption, stepBack, stepFurther } = props;
+
+  useEffect(() => {
+    //@ts-ignore
+    window.gtag('event', 'page_view', {
+      page_title: 'Choose delivery',
+      page_path: '/pedir/3',
+    });
+  }, []);
 
   return (
     <>
