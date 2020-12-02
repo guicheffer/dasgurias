@@ -24,7 +24,7 @@ code {
   font-weight: 600;
   margin: 4px;
   outline: none;
-  padding: 0px 4px;
+  padding: 2px 4px;
   position: absolute;
   right: 0;
   top: 0;
@@ -57,6 +57,6 @@ code {
   width: 100%;
 
   @media (min-width: $screen-sm-min) {
-    border-top: 1px solid var(--secondary-color);
+    position: relative;
   }
 }

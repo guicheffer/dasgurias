@@ -54,11 +54,16 @@ input:-webkit-autofill {
     padding: 10px;
     outline: 0;
     font-size: 18px;
+    font-weight: 300;
     letter-spacing: 1px;
     border-bottom: 1px solid $form-color;
     width: 100%;
 
-    &::placeholder { font-size: 15px; }
+    &::placeholder {
+      font-size: 15px;
+      font-weight: 300;
+    }
+
     &:not([data-show-placeholder])::placeholder {
       visibility: hidden;
     }
