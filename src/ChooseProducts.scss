@@ -1,3 +1,5 @@
+@import './commons/styles/breakpoints.scss';
+
 $black: #000;
 $white: #FFF;
 
@@ -65,10 +67,13 @@ $white: #FFF;
 
       svg path { fill: $white !important; }
 
-      &:active, &:hover {
-        background: var(--button-color);
 
-        svg path { fill: var(--secondary-color) !important; }
+      @media (min-width: $screen-sm-max) {
+        &:active, &:hover {
+          background: var(--button-color);
+
+          svg path { fill: var(--secondary-color) !important; }
+        }
       }
 
       &[disabled] {
