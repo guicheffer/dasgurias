@@ -41,7 +41,8 @@ function App() {
     total: 0,
   } as Amount);
 
-  const [selectedDeliveryOption, setSelectedDeliveryOption] = useState(DEFAULT_DELIVERIES.custom);
+  // This is where we set the default delivery option
+  const [selectedDeliveryOption, setSelectedDeliveryOption] = useState(DEFAULT_DELIVERIES.dhl);
 
   const hasFormData = useMemo(() => !!Object.values(formData).length, [formData]);
 

@@ -51,7 +51,7 @@ export const DeliveryOptions: FunctionComponent<DeliveryOptionsProps> = ({ child
       <section className="delivery-options">
         <nav className="delivery-options__choose">
           <ul>
-            <li data-selected={selectedDeliveryOption === DEFAULT_DELIVERIES.custom} data-value={DEFAULT_DELIVERIES.custom} onClick={handleChooseDeliveryOption}>
+            {!!Boolean(0) && <li data-selected={selectedDeliveryOption === DEFAULT_DELIVERIES.custom} data-value={DEFAULT_DELIVERIES.custom} onClick={handleChooseDeliveryOption}>
               <FontAwesomeIcon icon={faPeopleCarry}/>
 
               <section className="delivery-options__info">
@@ -59,7 +59,8 @@ export const DeliveryOptions: FunctionComponent<DeliveryOptionsProps> = ({ child
                 <p className="delivery-options__info-description">apenas para <strong>Berlim</strong>, dentro da área do Ring-Bahn (S41/S42) – das <strong>8h às 19h</strong></p>
                 <p className="delivery-options__info-price">{DELIVERIES_FEES.custom.toLocaleString('pt-BR', { style: 'currency', currency: 'eur' })}</p>
               </section>
-            </li>
+            </li>}
+
             <li data-selected={selectedDeliveryOption === DEFAULT_DELIVERIES.dhl} data-value={DEFAULT_DELIVERIES.dhl} onClick={handleChooseDeliveryOption}>
               <FontAwesomeIcon icon={faDhl}/>
 
