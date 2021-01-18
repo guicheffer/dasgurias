@@ -38,6 +38,12 @@ $white: #FFF;
         filter: none;
       }
 
+      &[data-disabled=true] {
+        filter: grayscale(1) blur(3px);
+        pointer-events: none;
+        user-select: none;
+      }
+
       svg {
         font-size: 60px !important;
         margin-right: 20px;

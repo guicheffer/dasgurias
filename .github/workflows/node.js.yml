@@ -6,8 +6,6 @@ name: CI to S3
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
 
 jobs:
   build:
@@ -54,4 +52,3 @@ jobs:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
         args: 🔥 Your website has now been deployed successfully -> http://dasgurias.eu/?check
-

@@ -5,6 +5,7 @@ import { Form, FormRequestData } from './Form';
 
 import './App.scss';
 
+import { AddressData } from './Form';
 import { Request } from './Request';
 import { ChooseProducts } from './ChooseProducts';
 import { DEFAULT_DELIVERIES, DeliveryOptions } from './DeliveryOptions';
@@ -65,6 +66,9 @@ function App() {
       history.push('/pedir/3');
     }, 400);
   }, [history]);
+
+  //@ts-ignore
+  const deliveryCountry = ((formData['different-address'] || formData.address) as AddressData)?.country;
 
   const stepBack = useCallback((rawFormData?: FormRequestData) => {
     if (rawFormData?.name) setFormData(rawFormData);
@@ -137,7 +141,7 @@ function App() {
 
           <Route path="/pedir/1" render={() => (isContentRequested && <ChooseProducts amount={amount} handleReactiveAmountAdd={handleReactiveAmountAdd} handleReactiveAmountRemove={handleReactiveAmountRemove} stepFurther={stepFurther}/>) || <Redirect to="/pedir" /> } />
           <Route path="/pedir/2" render={() => (amount.total && <Form formData={formData as FormRequestData} visible={!!isFormVisible} stepBack={stepBack} handleFormSubmit={handleFormSubmit} />) || <Redirect to="/pedir" /> } />
-          <Route path="/pedir/3" render={() => (hasFormData && <DeliveryOptions amount={amount} handleChooseDeliveryOption={handleChooseDeliveryOption} selectedDeliveryOption={selectedDeliveryOption} stepBack={stepBack} stepFurther={stepFurther}/>) || <Redirect to="/pedir" /> } />
+          <Route path="/pedir/3" render={() => (hasFormData && <DeliveryOptions deliveryCountry={deliveryCountry} amount={amount} handleChooseDeliveryOption={handleChooseDeliveryOption} selectedDeliveryOption={selectedDeliveryOption} stepBack={stepBack} stepFurther={stepFurther}/>) || <Redirect to="/pedir" /> } />
           <Route path="/pedir/4" render={() => (hasFormData && <Confirm requestId={requestId} requestIsLoading={requestIsLoading} handleCreateRequest={handleCreateRequest} amount={amount} formData={formData as FormRequestData} selectedDeliveryOption={selectedDeliveryOption} stepBack={stepBack}/>) || <Redirect to="/pedir" /> } />
 
           <Route path="/pedido/:requestId" render={({ match }) => (match.params.requestId && <Request axiosInstance={axios} successfullyLoadedRequest={successfullyLoadedRequest} requestId={match.params.requestId}/>) || <Redirect to="/pedir" /> } />

@@ -9,6 +9,7 @@ import getCurrentPrice from './commons/utils/get-current-price';
 
 interface DeliveryOptionsProps {
   amount: Amount;
+  deliveryCountry: string;
   handleChooseDeliveryOption: (event: any) => void;
 
   selectedDeliveryOption: DEFAULT_DELIVERIES;
@@ -36,7 +37,7 @@ export enum DELIVERIES_TITLES {
 }
 
 export const DeliveryOptions: FunctionComponent<DeliveryOptionsProps> = ({ children, ...props }): ReactElement => {
-  const { amount, handleChooseDeliveryOption, selectedDeliveryOption, stepBack, stepFurther } = props;
+  const { amount, deliveryCountry, handleChooseDeliveryOption, selectedDeliveryOption, stepBack, stepFurther } = props;
 
   useEffect(() => {
     //@ts-ignore
@@ -51,7 +52,7 @@ export const DeliveryOptions: FunctionComponent<DeliveryOptionsProps> = ({ child
       <section className="delivery-options">
         <nav className="delivery-options__choose">
           <ul>
-            {!!Boolean(0) && <li data-selected={selectedDeliveryOption === DEFAULT_DELIVERIES.custom} data-value={DEFAULT_DELIVERIES.custom} onClick={handleChooseDeliveryOption}>
+            {!!Boolean(0) && <li data-selected={selectedDeliveryOption === DEFAULT_DELIVERIES.custom && deliveryCountry === 'germany'} data-value={DEFAULT_DELIVERIES.custom} onClick={handleChooseDeliveryOption}>
               <FontAwesomeIcon icon={faPeopleCarry}/>
 
               <section className="delivery-options__info">
@@ -61,16 +62,17 @@ export const DeliveryOptions: FunctionComponent<DeliveryOptionsProps> = ({ child
               </section>
             </li>}
 
-            <li data-selected={selectedDeliveryOption === DEFAULT_DELIVERIES.dhl} data-value={DEFAULT_DELIVERIES.dhl} onClick={handleChooseDeliveryOption}>
+            <li data-disabled={deliveryCountry !== 'germany'} data-selected={selectedDeliveryOption === DEFAULT_DELIVERIES.dhl && deliveryCountry === 'germany'} data-value={DEFAULT_DELIVERIES.dhl} onClick={handleChooseDeliveryOption}>
               <FontAwesomeIcon icon={faDhl}/>
 
               <section className="delivery-options__info">
                 <h2>{DELIVERIES_TITLES.dhl}</h2>
-                <p className="delivery-options__info-description">apenas para <strong>Berlim</strong> e <strong>Alemanha</strong></p>
+                <p className="delivery-options__info-description">apenas para <strong>Alemanha</strong></p>
                 <p className="delivery-options__info-price">{DELIVERIES_FEES.dhl.toLocaleString('pt-BR', { style: 'currency', currency: 'eur' })}</p>
               </section>
             </li>
-            <li data-selected={selectedDeliveryOption === DEFAULT_DELIVERIES.external} data-value={DEFAULT_DELIVERIES.external} onClick={handleChooseDeliveryOption}>
+
+            <li data-disabled={deliveryCountry === 'germany'} data-selected={selectedDeliveryOption === DEFAULT_DELIVERIES.external || deliveryCountry !== 'germany'} data-value={DEFAULT_DELIVERIES.external} onClick={handleChooseDeliveryOption}>
               <FontAwesomeIcon icon={faGlobeEurope}/>
 
               <section className="delivery-options__info">
