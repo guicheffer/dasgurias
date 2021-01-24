@@ -44,7 +44,7 @@ body {
   min-height: 95vh;
   position: relative;
 
-  &[data-is-soldout] { filter: grayscale(1) blur(1px); }
+  &[data-is-soldout=true] { filter: grayscale(1) blur(1px); }
 
   &--content {
     align-items: center;

@@ -28,7 +28,7 @@ export interface Amount {
 function App() {
   const history = useHistory();
 
-  const [isSoldOut,] = useState(true); // :(
+  const [isSoldOut, setIsSoldOut] = useState(true); // :(
 
   const [isContentRequested, setIsContentRequested] = useState(false);
   const [isFormVisible, setIsFormVisible] = useState(false);
@@ -133,9 +133,9 @@ function App() {
 
   return (
     <div className="skeleton">
-      {isSoldOut && <img className="sold-out" src="/assets/sold-out.png" alt="Esgotado!"/>}
+      {isSoldOut && !requestId && <img className="sold-out" src="/assets/sold-out.png" alt="Esgotado!"/>}
 
-      <div className="dasgurias" data-is-soldout={isSoldOut}>
+      <div className="dasgurias" data-is-soldout={isSoldOut && !requestId}>
         <div
           className={`dasgurias--content ${isContentRequested ? 'dasgurias--content--form-requested' : ''}`}
           data-content-is-visible={!!requestStep}
@@ -152,7 +152,7 @@ function App() {
             <Route path="/pedir/3" render={() => (hasFormData && <DeliveryOptions deliveryCountry={deliveryCountry} amount={amount} handleChooseDeliveryOption={handleChooseDeliveryOption} selectedDeliveryOption={selectedDeliveryOption} stepBack={stepBack} stepFurther={stepFurther}/>) || <Redirect to="/pedir" /> } />
             <Route path="/pedir/4" render={() => (hasFormData && <Confirm requestId={requestId} requestIsLoading={requestIsLoading} handleCreateRequest={handleCreateRequest} amount={amount} formData={formData as FormRequestData} selectedDeliveryOption={selectedDeliveryOption} stepBack={stepBack}/>) || <Redirect to="/pedir" /> } />
 
-            <Route path="/pedido/:requestId" render={({ match }) => (match.params.requestId && <Request axiosInstance={axios} successfullyLoadedRequest={successfullyLoadedRequest} requestId={match.params.requestId}/>) || <Redirect to="/pedir" /> } />
+            <Route path="/pedido/:requestId" render={({ match }) => (match.params.requestId && !Boolean(setIsSoldOut(false)) && <Request axiosInstance={axios} successfullyLoadedRequest={successfullyLoadedRequest} requestId={match.params.requestId}/>) || <Redirect to="/pedir" /> } />
           </Switch>
         </div>
       </div>
