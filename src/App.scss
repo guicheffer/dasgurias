@@ -30,10 +30,21 @@ body {
   background: #251109;
 }
 
+.sold-out {
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 450px;
+  z-index: 999;
+}
+
 .dasgurias {
   margin-bottom: 2.5vh;
   min-height: 95vh;
   position: relative;
+
+  &[data-is-soldout] { filter: grayscale(1) blur(1px); }
 
   &--content {
     align-items: center;

@@ -28,6 +28,8 @@ export interface Amount {
 function App() {
   const history = useHistory();
 
+  const [isSoldOut,] = useState(true); // :(
+
   const [isContentRequested, setIsContentRequested] = useState(false);
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [requestStep, setRequestStep] = useState(0);
@@ -130,22 +132,29 @@ function App() {
   }, [])
 
   return (
-    <div className="dasgurias">
-      <div className={`dasgurias--content ${isContentRequested ? 'dasgurias--content--form-requested' : ''}`} data-content-is-visible={!!requestStep}>
-        <img className="dasgurias-logo" src="/golden-logo.png" alt="Logo dasgurias"/>
+    <div className="skeleton">
+      {isSoldOut && <img className="sold-out" src="/assets/sold-out.png" alt="Esgotado!"/>}
 
-        <Switch>
-          <Route exact path="/" render={() => <Redirect to="/pedir" />} />
+      <div className="dasgurias" data-is-soldout={isSoldOut}>
+        <div
+          className={`dasgurias--content ${isContentRequested ? 'dasgurias--content--form-requested' : ''}`}
+          data-content-is-visible={!!requestStep}
+        >
+          <img className="dasgurias-logo" src="/golden-logo.png" alt="Logo dasgurias"/>
 
-          <Route exact path="/pedir" render={() => !isContentRequested && <button onClick={handleFirstRequest} className="dasgurias--cta"> Quero pedir </button>} />
+          <Switch>
+            <Route exact path="/" render={() => <Redirect to="/pedir" />} />
 
-          <Route path="/pedir/1" render={() => (isContentRequested && <ChooseProducts amount={amount} handleReactiveAmountAdd={handleReactiveAmountAdd} handleReactiveAmountRemove={handleReactiveAmountRemove} stepFurther={stepFurther}/>) || <Redirect to="/pedir" /> } />
-          <Route path="/pedir/2" render={() => (amount.total && <Form formData={formData as FormRequestData} visible={!!isFormVisible} stepBack={stepBack} handleFormSubmit={handleFormSubmit} />) || <Redirect to="/pedir" /> } />
-          <Route path="/pedir/3" render={() => (hasFormData && <DeliveryOptions deliveryCountry={deliveryCountry} amount={amount} handleChooseDeliveryOption={handleChooseDeliveryOption} selectedDeliveryOption={selectedDeliveryOption} stepBack={stepBack} stepFurther={stepFurther}/>) || <Redirect to="/pedir" /> } />
-          <Route path="/pedir/4" render={() => (hasFormData && <Confirm requestId={requestId} requestIsLoading={requestIsLoading} handleCreateRequest={handleCreateRequest} amount={amount} formData={formData as FormRequestData} selectedDeliveryOption={selectedDeliveryOption} stepBack={stepBack}/>) || <Redirect to="/pedir" /> } />
+            <Route exact path="/pedir" render={() => !isContentRequested && <button onClick={handleFirstRequest} disabled={isSoldOut} className="dasgurias--cta"> Quero pedir </button>} />
 
-          <Route path="/pedido/:requestId" render={({ match }) => (match.params.requestId && <Request axiosInstance={axios} successfullyLoadedRequest={successfullyLoadedRequest} requestId={match.params.requestId}/>) || <Redirect to="/pedir" /> } />
-        </Switch>
+            <Route path="/pedir/1" render={() => (isContentRequested && <ChooseProducts amount={amount} handleReactiveAmountAdd={handleReactiveAmountAdd} handleReactiveAmountRemove={handleReactiveAmountRemove} stepFurther={stepFurther}/>) || <Redirect to="/pedir" /> } />
+            <Route path="/pedir/2" render={() => (amount.total && <Form formData={formData as FormRequestData} visible={!!isFormVisible} stepBack={stepBack} handleFormSubmit={handleFormSubmit} />) || <Redirect to="/pedir" /> } />
+            <Route path="/pedir/3" render={() => (hasFormData && <DeliveryOptions deliveryCountry={deliveryCountry} amount={amount} handleChooseDeliveryOption={handleChooseDeliveryOption} selectedDeliveryOption={selectedDeliveryOption} stepBack={stepBack} stepFurther={stepFurther}/>) || <Redirect to="/pedir" /> } />
+            <Route path="/pedir/4" render={() => (hasFormData && <Confirm requestId={requestId} requestIsLoading={requestIsLoading} handleCreateRequest={handleCreateRequest} amount={amount} formData={formData as FormRequestData} selectedDeliveryOption={selectedDeliveryOption} stepBack={stepBack}/>) || <Redirect to="/pedir" /> } />
+
+            <Route path="/pedido/:requestId" render={({ match }) => (match.params.requestId && <Request axiosInstance={axios} successfullyLoadedRequest={successfullyLoadedRequest} requestId={match.params.requestId}/>) || <Redirect to="/pedir" /> } />
+          </Switch>
+        </div>
       </div>
     </div>
   );
