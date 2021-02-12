@@ -41,7 +41,7 @@
     ]
   },
   "engines": {
-    "node": "15.*",
+    "node": "14.*",
     "yarn": "1.*"
   },
   "browserslist": {
