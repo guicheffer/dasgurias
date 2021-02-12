@@ -8,7 +8,7 @@
     "@fortawesome/free-regular-svg-icons": "5.15.1",
     "@fortawesome/free-solid-svg-icons": "5.15.1",
     "@fortawesome/react-fontawesome": "0.1.13",
-    "axios": "0.21.0",
+    "axios": "0.21.1",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-hook-form": "6.12.0",
@@ -41,7 +41,7 @@
     ]
   },
   "engines": {
-    "node": "14.*",
+    "node": "15.*",
     "yarn": "1.*"
   },
   "browserslist": {
